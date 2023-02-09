@@ -9,7 +9,7 @@ h1 {
     padding: 10px 20px;
     font-size: 18px;
     margin: 20px;
-    background-color: rgb(230, 186, 173);
+    background-color: rgb(143, 62, 8);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -78,3 +78,45 @@ h1 {
     }
   }
   
+  :root {
+    --border-repeat: stretch;
+    --border-style: ridge;
+    --border-image-slice: 50;
+    --border-image-width: auto;
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-wrap: wrap;
+    background-color: lightblue;
+}
+
+section{
+    text-align: center;
+    display: flex;
+    width: 30rem;
+    background-color: lightblue;
+    flex-wrap: nowrap;
+    padding: 2rem;
+    height: 30rem;
+    align-items: center;
+    justify-content: center;
+}
+.container {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border-image-source: url('https://img.freepik.com/free-vector/hand-drawn-abstract-background_23-2149957113.jpg?w=740&t=st=1671981151~exp=1671981751~hmac=ca672aa1441397c49c6a10c50f0b334af506c6250d3ef2e8849d75f89ae929b7');
+    border-image-slice: var(--border-image-slice);
+    border-image-repeat: var(--border-repeat);
+    border-width: 2rem;
+    border-image-width: var(--border-image-width);
+    border-color: grey;
+    border-style: var(--border-style);
+    transition: all 0.3s ease;
+    border-image-outset: 2;
+}

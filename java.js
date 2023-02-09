@@ -51,7 +51,7 @@ function fetchData(numberOfNames) {
         randomNames.push(randomName);
       }
 
-      namesElement.innerHTML = randomNames.join(", ");
+      namesElement.innerHTML = randomNames.join(" ");
     });
 }
 /*
