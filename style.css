@@ -1,0 +1,80 @@
+h1 {
+    text-align: center;
+    font-size: 36px;
+    margin-top: 50px;
+  }
+  
+  button {
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 18px;
+    margin: 20px;
+    background-color: rgb(230, 186, 173);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  p {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+  }
+  
+  #names {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+  
+  }
+  
+  #generatedNameContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: explode-out 0.5s ease-out forwards;
+  }
+  
+  
+  div {
+    text-align: center;
+  }
+  
+  button:hover {
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  button:active {
+    animation: slide 0.5s;
+  }
+  
+  @keyframes slide {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(10px);
+    }
+  }
+  
+  @keyframes explode-out {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.5);
+    }
+  }
+  
