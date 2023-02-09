@@ -4,6 +4,7 @@ const generateButton3 = document.getElementById("generateButton3");
 const generateButton4 = document.getElementById("generateMemeButton");
 const namesElement = document.getElementById("names");
 const memeElement = document.getElementById("meme");
+const copyNameButton = document.getElementById("copyNameButton");
 
 //Buttons
 
@@ -19,8 +20,20 @@ generateButton3.addEventListener("click", function() {
   fetchData(3);
 });
 
-generateButton4.addEventListener("click", function() {
-  fetchMeme();
+//generateButton4.addEventListener("click", function() {
+//  fetchMeme();
+//});
+
+copyNameButton.addEventListener("click", function() {
+  const names = document.querySelector("#names").textContent;
+  const tempInput = document.createElement("input");
+  tempInput.style.position = "absolute";
+  tempInput.style.left = "-9999px";
+  tempInput.value = names;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand("copy");
+  document.body.removeChild(tempInput);
 });
 
 //Random Name API Call
@@ -41,7 +54,7 @@ function fetchData(numberOfNames) {
       namesElement.innerHTML = randomNames.join(", ");
     });
 }
-
+/*
 //Random meme API call
 
 async function fetchMeme() {
@@ -96,5 +109,5 @@ button.addEventListener("click", function() {
       console.error(error.message);
     });
 });
-
+*/
 
