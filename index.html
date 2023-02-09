@@ -2,7 +2,132 @@
 <html>
   <head>
     <title>Tilfeldige Navn</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <!--<link rel="stylesheet" type="text/css" href="style.css">-->
+    <style>
+      h1 {
+    text-align: center;
+    font-size: 36px;
+    margin-top: 50px;
+  }
+  
+  button {
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 18px;
+    margin: 20px;
+    background-color: rgb(143, 62, 8);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  p {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+  }
+  
+  #names {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+  
+  }
+  
+  #generatedNameContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: explode-out 0.5s ease-out forwards;
+  }
+  
+  
+  div {
+    text-align: center;
+  }
+  
+  button:hover {
+    animation: pulse 3s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  button:active {
+    animation: slide 0.5s;
+  }
+  
+  @keyframes slide {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(10px);
+    }
+  }
+  
+  @keyframes explode-out {
+    0% {
+      transform: scale(0.1);
+    }
+    100% {
+      transform: scale(1.2);
+    }
+  }
+  
+  :root {
+    --border-repeat: stretch;
+    --border-style: ridge;
+    --border-image-slice: 50;
+    --border-image-width: auto;
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-wrap: wrap;
+    background-color: lightblue;
+}
+
+section{
+    text-align: center;
+    display: flex;
+    width: 30rem;
+    background-color: lightblue;
+    flex-wrap: nowrap;
+    padding: 2rem;
+    height: 30rem;
+    align-items: center;
+    justify-content: center;
+}
+.container {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border-image-source: url('https://img.freepik.com/free-vector/hand-drawn-abstract-background_23-2149957113.jpg?w=740&t=st=1671981151~exp=1671981751~hmac=ca672aa1441397c49c6a10c50f0b334af506c6250d3ef2e8849d75f89ae929b7');
+    border-image-slice: var(--border-image-slice);
+    border-image-repeat: var(--border-repeat);
+    border-width: 2rem;
+    border-image-width: var(--border-image-width);
+    border-color: grey;
+    border-style: var(--border-style);
+    transition: all 0.3s ease;
+    border-image-outset: 2;
+}
+
+    </style>
   </head>
   <body>
    <section>
@@ -22,6 +147,122 @@
       </div>
     </div>
   </section>
-    <script src="java.js"></script>
+  <script>
+    const generateButton1 = document.getElementById("generateButton1");
+const generateButton2 = document.getElementById("generateButton2");
+const generateButton3 = document.getElementById("generateButton3");
+const generateButton4 = document.getElementById("generateMemeButton");
+const namesElement = document.getElementById("names");
+const memeElement = document.getElementById("meme");
+const copyNameButton = document.getElementById("copyNameButton");
+
+//Buttons
+
+generateButton1.addEventListener("click", function() {
+  fetchData(1);
+});
+
+generateButton2.addEventListener("click", function() {
+  fetchData(2);
+});
+
+generateButton3.addEventListener("click", function() {
+  fetchData(3);
+});
+
+//generateButton4.addEventListener("click", function() {
+//  fetchMeme();
+//});
+
+copyNameButton.addEventListener("click", function() {
+  const names = document.querySelector("#names").textContent;
+  const tempInput = document.createElement("input");
+  tempInput.style.position = "absolute";
+  tempInput.style.left = "-9999px";
+  tempInput.value = names;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand("copy");
+  document.body.removeChild(tempInput);
+});
+
+//Random Name API Call
+
+function fetchData(numberOfNames) {
+  fetch(`https://sheets.googleapis.com/v4/spreadsheets/1b5Uf6JxBc-F1yazI_653cYkR2pxTFCyU2qnUkfIuo9o/values/Sheet1!A1:D?key=AIzaSyB1bQ9kyYXALIHZLOir7rHeSxzENpOWDTU`)
+    .then(response => response.json())
+    .then(data => {
+      const names = data.values;
+      let randomNames = [];
+
+      for (let i = 0; i < numberOfNames; i++) {
+        const randomIndex = Math.floor(Math.random() * names.length);
+        const randomName = `${names[randomIndex][0]} ${names[randomIndex][1]}`;
+        randomNames.push(randomName);
+      }
+
+      namesElement.innerHTML = randomNames.join(" ");
+    });
+}
+/*
+//Random meme API call
+
+async function fetchMeme() {
+  fetch("https://trending-memes-9gag.p.rapidapi.com/v1/fetch-sections?offset=0&limit=20&filter=Animal", {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "e78973b520mshaeeaad81a2125e3p1599c0jsna5fb4b93eaac",
+      "X-RapidAPI-Host": "trending-memes-9gag.p.rapidapi.com"
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (!data.data) {
+        throw new Error("No data received");
+      }
+      const randomIndex = Math.floor(Math.random() * data.data.length);
+      const randomMeme = data.data[randomIndex];
+      document.getElementById("memeImage").src = randomMeme.images.large.url;
+    })
+    .catch(error => console.error("There was a problem with the fetch operation: ", error));
+}
+
+document.getElementById("generateMemeButton").addEventListener("click", fetchMeme);
+
+//Random Image 
+const button = document.getElementById("fetchButton");
+button.addEventListener("click", function() {
+  var category = 'nature'
+  fetch(`https://api.api-ninjas.com/v1/randomimage?category=${category}`, {
+    method: "GET",
+    headers: {
+      "X-Api-Key": "YOUR_API_KEY",
+      "Accept": "image/jpg"
+    }
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`There was a problem with the fetch operation: ${response.statusText}`);
+      }
+      return response.blob();
+    })
+    .then(imageBlob => {
+      const imageUrl = URL.createObjectURL(imageBlob);
+      console.log(imageUrl);
+    })
+    .catch(error => {
+      console.error(error.message);
+    });
+});
+*/
+
+
+  </script>
+    <!--<script src="java.js"></script>-->
   </body>
 </html>
