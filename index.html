@@ -114,18 +114,7 @@ section{
     align-items: center;
     justify-content: center;
 }
-.container {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    border-image-source: url('https://img.freepik.com/free-vector/hand-drawn-abstract-background_23-2149957113.jpg?w=740&t=st=1671981151~exp=1671981751~hmac=ca672aa1441397c49c6a10c50f0b334af506c6250d3ef2e8849d75f89ae929b7');
-    border-image-slice: var(--border-image-slice);
-    border-image-repeat: var(--border-repeat);
-    border-width: 2rem;
-    border-image-width: var(--border-image-width);
-    border-color: grey;
-    border-style: var(--border-style);
-    transition: all 0.3s ease;
-    border-image-outset: 2;
-}
+
 
     </style>
   </head>
@@ -204,63 +193,6 @@ function fetchData(numberOfNames) {
       namesElement.innerHTML = randomNames.join(" ");
     });
 }
-/*
-//Random meme API call
-
-async function fetchMeme() {
-  fetch("https://trending-memes-9gag.p.rapidapi.com/v1/fetch-sections?offset=0&limit=20&filter=Animal", {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "e78973b520mshaeeaad81a2125e3p1599c0jsna5fb4b93eaac",
-      "X-RapidAPI-Host": "trending-memes-9gag.p.rapidapi.com"
-    }
-  })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then(data => {
-      if (!data.data) {
-        throw new Error("No data received");
-      }
-      const randomIndex = Math.floor(Math.random() * data.data.length);
-      const randomMeme = data.data[randomIndex];
-      document.getElementById("memeImage").src = randomMeme.images.large.url;
-    })
-    .catch(error => console.error("There was a problem with the fetch operation: ", error));
-}
-
-document.getElementById("generateMemeButton").addEventListener("click", fetchMeme);
-
-//Random Image 
-const button = document.getElementById("fetchButton");
-button.addEventListener("click", function() {
-  var category = 'nature'
-  fetch(`https://api.api-ninjas.com/v1/randomimage?category=${category}`, {
-    method: "GET",
-    headers: {
-      "X-Api-Key": "YOUR_API_KEY",
-      "Accept": "image/jpg"
-    }
-  })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`There was a problem with the fetch operation: ${response.statusText}`);
-      }
-      return response.blob();
-    })
-    .then(imageBlob => {
-      const imageUrl = URL.createObjectURL(imageBlob);
-      console.log(imageUrl);
-    })
-    .catch(error => {
-      console.error(error.message);
-    });
-});
-*/
-
 
   </script>
     <!--<script src="java.js"></script>-->
